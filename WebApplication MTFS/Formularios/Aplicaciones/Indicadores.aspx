@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Registrarse" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Formulario.aspx.vb" Inherits="WebApplication_MTFS.Formulario" %>
+﻿<%@ Page Title="Indicadores" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Indicadores.aspx.vb" Inherits="WebApplication_MTFS.Indicadores" %>
 
 <%@ Import Namespace="WebApplication_MTFS" %>
 <%@ Import Namespace="Microsoft.AspNet.Identity" %>
@@ -9,9 +9,8 @@
     rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
-
     <script type="text/javascript">
-
+        $('[id*=oGvResumenArea]').footable();
     </script>
 
     <h2><%: Title %>.</h2>
@@ -62,17 +61,32 @@
 	<ContentTemplate>
         <div class="form-group">
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control"/>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
+                <asp:DropDownList ID="DropDownListAreas" runat="server" DataTextField="Nombre_Area" DataValueField="Id_Area" CssClass="form-control" AutoPostBack="True"></asp:DropDownList>
+<%--                <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control"/>--%>
+<%--                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1"
                     CssClass="text-danger" ErrorMessage="El campo de correo electrónico es obligatorio." />
-                <asp:TextBox runat="server" ID="TextBox2" CssClass="form-control"/>
+                <asp:TextBox runat="server" ID="TextBox2" CssClass="form-control"/>--%>
             </div>
-            <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="Operacion_Click" Text="Operacion" CssClass="btn btn-default" />
-                <asp:Button ID="Button1" runat="server" Text="Button" />
+            <div class="col-md-10">
+                <asp:Button runat="server" OnClick="Operacion_Click" Text="Ver Indicadores" CssClass="btn btn-default" />
+                
+                <br />
+                <br />
+                <br />
+                Resultado<br />&nbsp;&nbsp;</div>
+            
+            <div class="col-md-10">
+
+                <asp:GridView ID="oGvResumenArea" runat="server" AutoGenerateColumns="False" CssClass="footable">
+                    <Columns>
+<%--                        <asp:BoundField DataField="CODIGO" HeaderText="CODIGO" />--%>
+                        <asp:BoundField DataField="NOMBRE" HeaderText="NOMBRE" />
+                        <asp:BoundField DataField="UNIDAD" HeaderText="UNIDAD" />
+                        <asp:BoundField DataField="VALOR" DataFormatString="{0:F2}" HeaderText="VALOR" ItemStyle-HorizontalAlign="Right" />
+                    </Columns>
+                </asp:GridView>
             </div>
-       </div>
-            <asp:GridView ID="GridView1" CssClass="footable" runat="server" AutoGenerateColumns="false"
+<%--            <asp:GridView ID="GridView1" CssClass="footable" runat="server" AutoGenerateColumns="false"
                 Style="max-width: 500px">
                 <Columns>
                     <asp:BoundField DataField="Name" HeaderText="Dia" />
@@ -80,29 +94,25 @@
                     <asp:BoundField DataField="Country" HeaderText="Paciente" />
                     <asp:BoundField DataField="Salary" HeaderText="Salary" />
                 </Columns>
-            </asp:GridView>
+            </asp:GridView>--%>
 
 
-            <asp:GridView ID="GridView2" CssClass="footable" runat="server" AutoGenerateColumns="False"
+<%--            <asp:GridView ID="GridView2" CssClass="footable" runat="server" AutoGenerateColumns="false"
                 Style="max-width: 500px">
                 <Columns>
-                    <asp:BoundField DataField="Usuario" HeaderText="nombre" />
-                    <asp:BoundField DataField="Apellido_Usuario" HeaderText="Apellido" />
-                    </Columns>
-            </asp:GridView>
+                    <asp:BoundField DataField="Name" HeaderText="Dia" />
+                    <asp:BoundField DataField="Id" HeaderText="Hora" />
+                    <asp:BoundField DataField="Country" HeaderText="Paciente" />
+                    <asp:BoundField DataField="Salary" HeaderText="Salary" />
+                </Columns>
+            </asp:GridView>--%>
 
         </div>
     </ContentTemplate>
     </asp:UpdatePanel>
 
-     
 
 
-    
-
-        <script type="text/javascript">
-        
-        </script>
 
     </div>
 

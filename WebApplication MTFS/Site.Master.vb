@@ -1,10 +1,12 @@
 ﻿Imports Microsoft.AspNet.Identity
-
+Imports MTFS.BL
 Public Class SiteMaster
     Inherits MasterPage
     Private Const AntiXsrfTokenKey As String = "__AntiXsrfToken"
     Private Const AntiXsrfUserNameKey As String = "__AntiXsrfUserName"
     Private _antiXsrfTokenValue As String
+    Private vpo_Acceso As oCls_acceso
+    Public vps_Menu As String
 
     Protected Sub Page_Init(sender As Object, e As EventArgs)
         ' El código siguiente ayuda a proteger frente a ataques XSRF
@@ -32,7 +34,7 @@ Public Class SiteMaster
             End If
             Response.Cookies.[Set](responseCookie)
         End If
-
+        'mpn_CrearMenuSistema2()
         AddHandler Page.PreLoad, AddressOf master_Page_PreLoad
     End Sub
 
@@ -56,5 +58,43 @@ Public Class SiteMaster
     Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
         Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie)
     End Sub
+    'Private Sub mpn_CrearMenuSistema2()
+    '    Try
+    '        Session("Id_Usuario") = 30
+    '        Dim nodohijo As String
+    '        Dim vlo_dr_modulos As New Data.DataTable
+    '        Dim vlo_dr_grupo_modulos As New Data.DataTable
+    '        vpo_Acceso = New oCls_acceso
+
+    '        vlo_dr_grupo_modulos = vpo_Acceso.fpn_LlenarGrupoModulo(Session("Id_Usuario"))
+
+
+    '        For i = 0 To vlo_dr_grupo_modulos.Rows.Count - 1
+
+    '            'CREO LOS NODOS PRINCIPALES
+    '            vps_Menu += "<h1>" + vlo_dr_grupo_modulos(i)("Nombre_Modulo") + "</h1>"
+    '            vps_Menu += "<ul class=""toggle"">"
+
+    '            vlo_dr_modulos = vpo_Acceso.fpn_LlenarGrupoModuloViewHijos(CInt(vlo_dr_grupo_modulos(i)("id_modulo")), Session("Id_Usuario"))
+
+    '            For j = 0 To vlo_dr_modulos.Rows.Count - 1
+    '                'CREO LOS NODOS HIJOS
+    '                nodohijo = vlo_dr_modulos(j)("Ruta_Modulo")
+    '                vps_Menu += "<li class=""icn_new_article"" id=" + vlo_dr_modulos(j)("Ruta_Modulo") + "><a href=""#"" onclick=""CargarIframe('" + vlo_dr_modulos(j)("Ruta_Modulo") + "')"";>" + vlo_dr_modulos(j)("Nombre_Modulo") + "</a></li>"
+    '            Next
+    '            vps_Menu += "</ul>"
+    '        Next
+
+    '        vps_Menu += "<ul>"
+    '        'vps_Menu += "<li class=""icn_security"" id=""links""><a href=""#"" onclick=""CargarIframe('../Acceso/ActualizarUsuario.aspx')"";> Actualizar Datos Usuario </a></li>"
+    '        vps_Menu += "</ul>"
+
+    '        oDiv_Menu.InnerHtml = vps_Menu
+
+    '    Catch
+
+    '    End Try
+
+    'End Sub
 
 End Class
